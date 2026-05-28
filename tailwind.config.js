@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#a855f7", // Purple accent as hinted in details.md
+        primary: "#ff4d00", // Bright Orange accent
       },
       keyframes: {
         'shiny-text': {

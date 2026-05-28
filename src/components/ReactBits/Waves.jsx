@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 
 const Waves = ({
-  lineColor = 'rgba(168, 85, 247, 0.3)',
+  lineColor = 'rgba(255, 77, 0, 0.3)',
   backgroundColor = 'transparent',
   waveSpeedX = 0.0125,
   waveSpeedY = 0.005,
