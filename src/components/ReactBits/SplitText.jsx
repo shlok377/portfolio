@@ -1,0 +1,87 @@
+import { useSprings, animated } from '@react-spring/web';
+import { useEffect, useRef, useState } from 'react';
+
+const SplitText = ({
+  text = '',
+  className = '',
+  delay = 100,
+  animationFrom = { opacity: 0, transform: 'translate3d(0,40px,0)' },
+  animationTo = { opacity: 1, transform: 'translate3d(0,0,0)' },
+  easing = 'easeOutCubic',
+  threshold = 0.1,
+  rootMargin = '0px',
+  textAlign = 'center',
+  onLetterAnimationComplete,
+}) => {
+  const words = text.split(' ');
+  const letters = text.split('');
+  const [inView, setInView] = useState(false);
+  const ref = useRef();
+  const animatedCount = useRef(0);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.unobserve(ref.current);
+        }
+      },
+      { threshold, rootMargin }
+    );
+
+    observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, [threshold, rootMargin]);
+
+  const springs = useSprings(
+    letters.length,
+    letters.map((_, i) => ({
+      from: animationFrom,
+      to: inView
+        ? async (next) => {
+          await next(animationTo);
+          animatedCount.current += 1;
+          if (animatedCount.current === letters.length && onLetterAnimationComplete) {
+            onLetterAnimationComplete();
+          }
+        }
+        : animationFrom,
+      delay: i * delay,
+      config: { easing },
+    }))
+  );
+
+  return (
+    <p
+      ref={ref}
+      className={`split-parent overflow-hidden inline-block ${className}`}
+      style={{ textAlign, whiteSpace: 'normal', wordBreak: 'break-word' }}
+    >
+      {words.map((word, wordIndex) => (
+        <span key={wordIndex} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+          {word.split('').map((letter, letterIndex) => {
+            const index = text.split(' ').slice(0, wordIndex).join('').length + wordIndex + letterIndex;
+
+            return (
+              <animated.span
+                key={index}
+                style={{
+                  ...springs[index],
+                  display: 'inline-block',
+                  willChange: 'transform, opacity',
+                }}
+              >
+                {letter}
+              </animated.span>
+            );
+          })}
+          <span style={{ display: 'inline-block' }}>&nbsp;</span>
+        </span>
+      ))}
+    </p>
+  );
+};
+
+export default SplitText;
