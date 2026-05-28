@@ -6,7 +6,7 @@ import ClickSpark from './components/ReactBits/ClickSpark';
 import { THEME_CONFIG } from './config';
 
 function App() {
-  const { colors, particles, image, title, sparks } = THEME_CONFIG;
+  const { colors, particles, image, title, tagline, sparks } = THEME_CONFIG;
 
   return (
     <ClickSpark
@@ -39,31 +39,60 @@ function App() {
 
         {/* Hero Content */}
         <main className="relative z-10 min-h-screen flex flex-col items-center justify-center pointer-events-none">
-          {/* Title Section */}
+          {/* Text Group (Title + Tagline) */}
           <div 
             style={{ 
-              width: `calc(100% - (2 * ${title.marginSides}))`, 
-              height: title.height,
               position: 'absolute',
-              top: '50%',
+              top: title.topOffset,
               left: '50%',
               transform: 'translate(-50%, -50%)',
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
               zIndex: 20,
-              pointerEvents: 'auto'
+              pointerEvents: 'none'
             }}
           >
-            <TextPressure
-              text={title.text}
-              flex={title.flex}
-              alpha={title.alpha}
-              stroke={title.stroke}
-              width={title.width}
-              weight={title.weight}
-              italic={title.italic}
-              textColor={title.textColor}
-              strokeColor={title.strokeColor}
-              minFontSize={title.minFontSize}
-            />
+            <div 
+              style={{ 
+                width: `calc(100% - (2 * ${title.marginSides}))`, 
+                height: title.height,
+                pointerEvents: 'auto'
+              }}
+            >
+              <TextPressure
+                text={title.text}
+                flex={title.flex}
+                alpha={title.alpha}
+                stroke={title.stroke}
+                width={title.width}
+                weight={title.weight}
+                italic={title.italic}
+                textColor={title.textColor}
+                strokeColor={title.strokeColor}
+                minFontSize={title.minFontSize}
+              />
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: tagline.animation.initialY }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: tagline.animation.duration, 
+                delay: tagline.animation.delay 
+              }}
+              style={{ 
+                color: tagline.color, 
+                fontSize: tagline.fontSize, 
+                letterSpacing: tagline.letterSpacing,
+                marginTop: tagline.marginTop,
+                pointerEvents: 'auto'
+              }}
+              className="uppercase font-medium text-center relative"
+            >
+              {tagline.text}
+            </motion.div>
           </div>
 
           {/* Image Section */}

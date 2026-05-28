@@ -10,7 +10,7 @@ export const THEME_CONFIG = {
     },
     imageBrightness: "brightness(0.3)", // Adjusted darkness
     imageGrayscale: "grayscale(100%)", // Greyscale filter
-    imageYOffset: "120px", // Vertical offset
+    imageYOffset: "100px", // Vertical offset
   },
   particles: {
     count: 250,
@@ -20,7 +20,7 @@ export const THEME_CONFIG = {
     pixelRatio: 1,
     moveParticlesOnHover: true,
     particleHoverFactor: 1,
-    alphaParticles: false,
+    alphaParticles: true,
     disableRotation: false,
     cameraDistance: 20,
     sizeRandomness: 1,
@@ -41,6 +41,7 @@ export const THEME_CONFIG = {
   title: {
     text: "SHLOK DALSANIA",
     height: "00px",
+    topOffset: "80%", // Position from top
     marginSides: "5vw",
     minFontSize: 36,
     flex: true,
@@ -51,6 +52,18 @@ export const THEME_CONFIG = {
     italic: true,
     textColor: "#ffffff",
     strokeColor: "#52d4ff",
+  },
+  tagline: {
+    text: "Engineering student by day, building projects by night.",
+    color: "#52d4ff", // Zinc-500 for a subtle look
+    fontSize: "20px",
+    letterSpacing: "0.2em",
+    marginTop: "224px",
+    animation: {
+      initialY: 10,
+      duration: 1,
+      delay: 0.5,
+    }
   },
   sparks: {
     color: "#52d4ff",
