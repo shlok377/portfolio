@@ -1,6 +1,6 @@
 export const THEME_CONFIG = {
   colors: {
-    background: "#0f0f0f",
+    background: "#000000",
     primary: "#ff4d00", // Bright Orange accent
     text: "#ffffff",
     particles: ["#ffffff"],
@@ -8,7 +8,8 @@ export const THEME_CONFIG = {
       500: "#71717a",
       600: "#52525b",
     },
-    imageBrightness: "brightness(0.5)", // Adjusted darkness
+    imageBrightness: "brightness(0.3)", // Adjusted darkness
+    imageGrayscale: "grayscale(100%)", // Greyscale filter
     imageYOffset: "120px", // Vertical offset
   },
   particles: {
@@ -27,14 +28,28 @@ export const THEME_CONFIG = {
   image: {
     width: "auto",
     height: "auto",
-    maxWidth: "100vw",
-    maxHeight: "90vh",
-    fadeStart: "50%", // Where the bottom fade starts
+    maxWidth: "90vw",
+    maxHeight: "87vh",
+    fadeStart: "77%", // Where the bottom fade starts
     fadeEnd: "100%",  // Where the bottom fade ends
     animation: {
       initialY: 20,
       duration: 1,
       ease: "easeOut"
     }
+  },
+  title: {
+    text: "SHLOK DALSANIA",
+    height: "00px",
+    marginSides: "5vw",
+    minFontSize: 36,
+    flex: true,
+    alpha: false,
+    stroke: false,
+    width: true,
+    weight: true,
+    italic: true,
+    textColor: "#ffffff",
+    strokeColor: "#ff4d00",
   }
 };
