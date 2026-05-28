@@ -1,7 +1,7 @@
 export const THEME_CONFIG = {
   colors: {
     background: "#000000",
-    primary: "#ff4d00", // Bright Orange accent
+    primary: "#52d4ff", // New Accent color
     text: "#ffffff",
     particles: ["#ffffff"],
     zinc: {
@@ -50,6 +50,15 @@ export const THEME_CONFIG = {
     weight: true,
     italic: true,
     textColor: "#ffffff",
-    strokeColor: "#ff4d00",
+    strokeColor: "#52d4ff",
+  },
+  sparks: {
+    color: "#52d4ff",
+    size: 27,
+    radius: 75,
+    count: 8,
+    duration: 400,
+    easing: "ease-out",
+    extraScale: 1.0,
   }
 };
