@@ -1,7 +1,7 @@
 export const THEME_CONFIG = {
   colors: {
     background: "#000000",
-    primary: "#52d4ff", // New Accent color
+    primary: "#00d0ff", // New Accent color
     text: "#ffffff",
     particles: ["#ffffff"],
     zinc: {
@@ -34,39 +34,57 @@ export const THEME_CONFIG = {
     fadeEnd: "100%",  // Where the bottom fade ends
     animation: {
       initialY: 20,
-      duration: 1,
-      ease: "easeOut"
-    }
-  },
-  title: {
-    text: "SHLOK DALSANIA",
-    height: "00px",
-    topOffset: "80%", // Position from top
-    marginSides: "5vw",
-    minFontSize: 36,
-    flex: true,
-    alpha: false,
-    stroke: false,
-    width: true,
-    weight: true,
-    italic: true,
-    textColor: "#ffffff",
-    strokeColor: "#52d4ff",
-  },
-  tagline: {
-    text: "Engineering student by day, building projects by night.",
-    color: "#52d4ff", // Zinc-500 for a subtle look
-    fontSize: "20px",
-    letterSpacing: "0.2em",
-    marginTop: "224px",
-    animation: {
-      initialY: 10,
-      duration: 1,
-      delay: 0.5,
-    }
-  },
-  sparks: {
-    color: "#52d4ff",
+        duration: 1,
+        ease: "easeOut"
+      },
+      mobile: {
+        maxWidth: "95vw",
+        maxHeight: "60vh",
+        imageYOffset: "80px",
+      }
+      },
+      title: {
+      text: "SHLOK DALSANIA",
+      height: "00px",
+      topOffset: "80%", // Position from top
+      marginSides: "5vw",
+      minFontSize: 36,
+      flex: true,
+      alpha: false,
+      stroke: false,
+      width: true,
+      weight: true,
+      italic: true,
+      textColor: "#ffffff",
+      strokeColor: "#00d0ff",
+      mobile: {
+        topOffset: "75%",
+        marginSides: "8vw",
+        minFontSize: 24,
+      }
+      },
+      tagline: {
+      text: "Engineering student by day, at war with CLI by night.",
+      color: "#00d0ff", // Zinc-500 for a subtle look
+      fontSize: "20px",
+      letterSpacing: "0.2em",
+      marginTop: "224px",
+      animation: {
+        initialY: 10,
+        duration: 1,
+        delay: 0.5,
+      },
+      mobile: {
+        fontSize: "12px",
+        letterSpacing: "0.15em",
+        marginTop: "100px",
+      }
+      },
+      breakpoints: {
+      mobile: 768, // px
+      },
+      sparks: {
+    color: "#00d0ff",
     size: 27,
     radius: 75,
     count: 8,
