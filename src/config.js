@@ -1,12 +1,13 @@
 export const THEME_CONFIG = {
   colors: {
     background: "#000000",
+    backgroundGradient: "radial-gradient(circle at center, #101010 0%, #000000 100%)",
     primary: "#00d0ff", // New Accent color
     text: "#ffffff",
     particles: ["#ffffff"],
     zinc: {
-      500: "#71717a",
-      600: "#52525b",
+      500: "#232323",
+      600: "#1a1a1d",
     },
     imageBrightness: "brightness(0.3)", // Adjusted darkness
     imageGrayscale: "grayscale(100%)", // Greyscale filter
@@ -64,7 +65,7 @@ export const THEME_CONFIG = {
       }
       },
       tagline: {
-      text: "Engineering student by day, at war with CLI by night.",
+      text: "Gaining Experiences one step at a time",
       color: "#00d0ff", // Zinc-500 for a subtle look
       fontSize: "20px",
       letterSpacing: "0.2em",

@@ -34,7 +34,7 @@ function App() {
       easing={sparks.easing}
       extraScale={sparks.extraScale}
     >
-      <div className={`min-h-screen text-white relative overflow-hidden`} style={{ backgroundColor: colors.background }}>
+      <div className={`min-h-screen text-white relative overflow-hidden`} style={{ background: colors.backgroundGradient || colors.background }}>
         {/* Background Particles */}
         <div className="absolute inset-0 z-0">
           <Particles
