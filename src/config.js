@@ -65,22 +65,41 @@ export const THEME_CONFIG = {
       }
       },
       tagline: {
-      text: "Gaining Experiences one step at a time",
-      color: "#00d0ff", // Zinc-500 for a subtle look
-      fontSize: "20px",
-      letterSpacing: "0.2em",
-      marginTop: "224px",
-      animation: {
-        initialY: 10,
-        duration: 1,
-        delay: 0.5,
+        text: "putting AI to good use",
+        color: "#00d0ff", // Zinc-500 for a subtle look
+        fontSize: "20px",
+        letterSpacing: "0.2em",
+        marginTop: "224px",
+        animation: {
+          initialY: 10,
+          duration: 1,
+          delay: 0.5,
+        },
+        mobile: {
+          fontSize: "12px",
+          letterSpacing: "0.15em",
+          marginTop: "100px",
+        }
       },
-      mobile: {
-        fontSize: "12px",
-        letterSpacing: "0.15em",
-        marginTop: "100px",
-      }
-      },
+      navbar: {
+        links: [
+          { label: "Home", href: "#home" },
+          { label: "Experience", href: "#experience" },
+          { label: "Skills", href: "#skills" },
+          { label: "Testimonials", href: "#testimonials" },
+          { label: "Get in Touch", href: "#contact" },
+        ],
+        backgroundOpacity: "0.4",
+        height: "80px",
+        paddingSides: "10vw",
+        animation: {
+          magnetPadding: 180,
+          magnetStrength: 20, // Higher = less movement, Lower = more movement
+          activeTransition: "transform 0.3s ease-out",
+          inactiveTransition: "transform 0.5s ease-in-out",
+          glowStrength: "0 0 15px rgba(0, 208, 255, 0.8)",
+        }
+        },
       breakpoints: {
       mobile: 768, // px
       },

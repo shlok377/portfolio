@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Particles from './components/ReactBits/Particles';
 import TextPressure from './components/ReactBits/TextPressure';
 import ClickSpark from './components/ReactBits/ClickSpark';
+import Navbar from './components/Navbar';
 import { THEME_CONFIG } from './config';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
       easing={sparks.easing}
       extraScale={sparks.extraScale}
     >
+      <Navbar isMobile={isMobile} />
       <div className={`min-h-screen text-white relative overflow-hidden`} style={{ background: colors.backgroundGradient || colors.background }}>
         {/* Background Particles */}
         <div className="absolute inset-0 z-0">
