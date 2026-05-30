@@ -167,7 +167,7 @@ function App() {
             )}
 
                   <img 
-                  src="img/me_transparent.png" 
+                  src="img/me_transparent - Copy.png" 
                   alt="Shlok Dalsania" 
                   style={{
                   width: currentImage.width,

@@ -29,8 +29,8 @@ export const THEME_CONFIG = {
   image: {
     width: "auto",
     height: "auto",
-    maxWidth: "90vw",
-    maxHeight: "87vh",
+    maxWidth: "107vw",
+    maxHeight: "97vh",
     fadeStart: "77%", // Where the bottom fade starts
     fadeEnd: "100%",  // Where the bottom fade ends
     animation: {
