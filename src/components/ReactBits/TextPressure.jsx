@@ -38,7 +38,7 @@ const TextPressure = ({
   scale = false,
 
   textColor = '#FFFFFF',
-  strokeColor = '#00d0ff',
+  strokeColor = '#FF0000',
   className = '',
 
   minFontSize = 24
@@ -53,11 +53,22 @@ const TextPressure = ({
   const [fontSize, setFontSize] = useState(minFontSize);
   const [scaleY, setScaleY] = useState(1);
   const [lineHeight, setLineHeight] = useState(1);
+  const [isInView, setIsInView] = useState(true);
 
   const chars = text.split('');
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     const handleMouseMove = e => {
+      if (!isInView) return;
       cursorRef.current.x = e.clientX;
       cursorRef.current.y = e.clientY;
     };
@@ -82,7 +93,7 @@ const TextPressure = ({
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
     };
-  }, []);
+  }, [isInView]);
 
   const setSize = useCallback(() => {
     if (!containerRef.current || !titleRef.current) return;
@@ -118,6 +129,10 @@ const TextPressure = ({
   useEffect(() => {
     let rafId;
     const animate = () => {
+      if (!isInView) {
+        rafId = requestAnimationFrame(animate);
+        return;
+      }
       mouseRef.current.x += (cursorRef.current.x - mouseRef.current.x) / 15;
       mouseRef.current.y += (cursorRef.current.y - mouseRef.current.y) / 15;
 
@@ -157,7 +172,7 @@ const TextPressure = ({
 
     animate();
     return () => cancelAnimationFrame(rafId);
-  }, [width, weight, italic, alpha]);
+  }, [width, weight, italic, alpha, isInView]);
 
   const styleElement = useMemo(() => {
     return (

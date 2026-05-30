@@ -12,12 +12,19 @@ function App() {
   const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {
+    let timeoutId = null;
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < breakpoints.mobile);
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setIsMobile(window.innerWidth < breakpoints.mobile);
+      }, 150);
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      clearTimeout(timeoutId);
+    };
   }, [breakpoints.mobile]);
 
   // Responsive values
@@ -25,6 +32,7 @@ function App() {
   const currentTagline = isMobile ? { ...tagline, ...tagline.mobile } : tagline;
   const currentImage = isMobile ? { ...image, ...image.mobile } : image;
   const currentImageYOffset = isMobile ? image.mobile.imageYOffset : colors.imageYOffset;
+  const currentParticleCount = isMobile ? (particles.mobile?.count || particles.count) : particles.count;
 
   return (
     <ClickSpark
@@ -42,7 +50,7 @@ function App() {
         <div className="absolute inset-0 z-0">
           <Particles
             particleColors={colors.particles}
-            particleCount={particles.count}
+            particleCount={currentParticleCount}
             particleSpread={particles.spread}
             speed={particles.speed}
             particleBaseSize={particles.baseSize}
@@ -132,7 +140,7 @@ function App() {
                   animate={{ 
                     opacity: 1, 
                     x: `calc(-${sideCards.horizontalOffset})`,
-                    y: `calc(${sideCards.baseYOffset} - ${sideCards.verticalOffset})` // Shifted Quadrant 2
+                    y: `calc(${sideCards.baseYOffset} - ${sideCards.verticalOffset})`
                   }}
                   transition={{ duration: 1, delay: 0.8 }}
                   className="absolute"
@@ -150,7 +158,7 @@ function App() {
                   animate={{ 
                     opacity: 1, 
                     x: sideCards.horizontalOffset,
-                    y: `calc(${sideCards.baseYOffset} + ${sideCards.verticalOffset})` // Shifted Quadrant 4
+                    y: `calc(${sideCards.baseYOffset} + ${sideCards.verticalOffset})`
                   }}
                   transition={{ duration: 1, delay: 0.8 }}
                   className="absolute"
@@ -166,38 +174,38 @@ function App() {
               </>
             )}
 
-                  <img 
-                  src="img/me_transparent - Copy.png" 
-                  alt="Shlok Dalsania" 
-                  style={{
-                  width: currentImage.width,
-                  height: currentImage.height,
-                  maxWidth: currentImage.maxWidth,
-                  maxHeight: currentImage.maxHeight,
-                  filter: `${colors.imageBrightness} ${colors.imageGrayscale}`,
-                  maskImage: `linear-gradient(to bottom, black ${image.fadeStart}, transparent ${image.fadeEnd})`,
-                  WebkitMaskImage: `linear-gradient(to bottom, black ${image.fadeStart}, transparent ${image.fadeEnd})`
-                  }}
-                  className="block"
-                  />
+            <img 
+              src="img/me_transparent - Copy.png" 
+              alt="Shlok Dalsania" 
+              style={{
+                width: currentImage.width,
+                height: currentImage.height,
+                maxWidth: currentImage.maxWidth,
+                maxHeight: currentImage.maxHeight,
+                filter: `${colors.imageBrightness} ${colors.imageGrayscale}`,
+                maskImage: `linear-gradient(to bottom, black ${image.fadeStart}, transparent ${image.fadeEnd})`,
+                WebkitMaskImage: `linear-gradient(to bottom, black ${image.fadeStart}, transparent ${image.fadeEnd})`
+              }}
+              className="block"
+            />
 
-                  {/* Mobile Cards Stack */}
-                  {isMobile && (
-                  <div className="flex flex-col gap-6 items-center w-full pointer-events-auto mt-8 px-6">
-                  <AnimatedCard 
+            {/* Mobile Cards Stack */}
+            {isMobile && (
+              <div className="flex flex-col gap-6 items-center w-full pointer-events-auto mt-8 px-6">
+                <AnimatedCard 
                   header={sideCards.left.header}
                   title={sideCards.left.title}
                   description={sideCards.left.description}
                   backgroundOpacity={sideCards.backgroundOpacity}
-                  />
-                  <AnimatedCard 
+                />
+                <AnimatedCard 
                   header={sideCards.right.header}
                   title={sideCards.right.title}
                   description={sideCards.right.description}
                   backgroundOpacity={sideCards.backgroundOpacity}
-                  />
-                  </div>
-                  )}
+                />
+              </div>
+            )}
           </motion.div>
         </main>
       </div>

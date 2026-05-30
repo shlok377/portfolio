@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -13,6 +13,7 @@ const ParticleSystem = ({
   particleBaseSize = 100,
   sizeRandomness = 1,
   disableRotation = false,
+  isInView = true,
 }) => {
   const points = useRef();
   const { viewport, mouse } = useThree();
@@ -36,14 +37,12 @@ const ParticleSystem = ({
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
   useFrame((state) => {
+    if (!isInView) return;
+
     if (!disableRotation && points.current) {
       points.current.rotation.x = THREE.MathUtils.lerp(points.current.rotation.x, state.mouse.y * 0.2, 0.05);
       points.current.rotation.y = THREE.MathUtils.lerp(points.current.rotation.y, state.mouse.x * 0.2, 0.05);
     }
-
-    // Since we're using a points system, we don't need to update individual matrices
-    // unless we were using InstancedMesh. For Points, we'd typically update the position buffer.
-    // However, for a simple particle system, we can just let it be or update the geometry.
   });
 
   const [positions, colors, sizes] = useMemo(() => {
@@ -97,13 +96,26 @@ const ParticleSystem = ({
 };
 
 const Particles = (props) => {
+  const containerRef = useRef();
+  const [isInView, setIsInView] = useState(true);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="w-full h-full absolute inset-0">
+    <div ref={containerRef} className="w-full h-full absolute inset-0">
       <Canvas
         camera={{ position: [0, 0, props.cameraDistance || 20], fov: 75 }}
         dpr={props.pixelRatio || [1, 2]}
+        frameloop={isInView ? 'always' : 'never'}
       >
-        <ParticleSystem {...props} />
+        <ParticleSystem {...props} isInView={isInView} />
       </Canvas>
     </div>
   );
