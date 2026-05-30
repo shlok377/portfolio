@@ -3,7 +3,7 @@ export const THEME_CONFIG = {
     background: "#000000",
     backgroundGradient: "radial-gradient(circle at center, #101010 0%, #000000 100%)",
     primary: "#00d0ff", // New Accent color
-    aboutBackground: "radial-gradient(circle, #191e1f 0%, #171717 100%)",
+    aboutBackground: "radial-gradient(circle, #363636 0%, rgb(0, 0, 0) 100%)",
     text: "#ffffff",
     particles: ["#ffffff"],
     zinc: {
@@ -105,6 +105,21 @@ export const THEME_CONFIG = {
       marginTop: "400px",
     }
   },
+  about: {
+    title: {
+      text: "ABOUT ME",
+      delay: 175,
+      duration: 2.25,
+      threshold: 0.5,
+      ease: "elastic.out(1, 0.3)",
+      splitType: "chars",
+      className: "text-white text-4xl md:text-7xl font-black tracking-tighter mb-12",
+      from: { opacity: 0, y: 40 },
+      to: { opacity: 1, y: 0 },
+      rootMargin: "-100px",
+      threshold: 0.1,
+    }
+  },
   navbar: {
     links: [
       { label: "Home", href: "#home" },
@@ -121,8 +136,16 @@ export const THEME_CONFIG = {
       magnetStrength: 20,
       activeTransition: "transform 0.3s ease-out",
       inactiveTransition: "transform 0.5s ease-in-out",
-      glowStrength: "0 0 15px rgba(0, 208, 255, 0.8)",
+      glowStrength: "0 0 15px #00d0ff",
     }
+  },
+  animations: {
+    viewport: {
+      once: true,
+      amount: 0.2, // Triggers when 20% visible
+    },
+    defaultDuration: 1.8,
+    defaultEase: "easeOut",
   },
   breakpoints: {
     mobile: 768,

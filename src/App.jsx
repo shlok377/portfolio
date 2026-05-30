@@ -5,10 +5,11 @@ import TextPressure from './components/ReactBits/TextPressure';
 import ClickSpark from './components/ReactBits/ClickSpark';
 import Navbar from './components/Navbar';
 import AnimatedCard from './components/AnimatedCard';
+import SplitText from './components/ReactBits/SplitText';
 import { THEME_CONFIG } from './config';
 
 function App() {
-  const { colors, particles, image, title, tagline, sideCards, sparks, breakpoints } = THEME_CONFIG;
+  const { colors, particles, image, title, tagline, sideCards, about, animations, sparks, breakpoints } = THEME_CONFIG;
   const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {
@@ -70,7 +71,10 @@ function App() {
           {/* Hero Content */}
           <div className="relative z-10 min-h-screen flex flex-col items-center justify-center pointer-events-none">
             {/* Text Group (Name + Tagline) */}
-            <div 
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={animations.viewport}
               style={{ 
                 position: 'absolute',
                 top: currentTitle.topOffset,
@@ -123,12 +127,13 @@ function App() {
               >
                 {currentTagline.text}
               </motion.div>
-            </div>
+            </motion.div>
 
             {/* Image and Cards Section */}
             <motion.div
               initial={{ opacity: 0, y: image.animation.initialY }}
-              animate={{ opacity: 1, y: currentImageYOffset }}
+              whileInView={{ opacity: 1, y: currentImageYOffset }}
+              viewport={animations.viewport}
               transition={{ 
                 duration: image.animation.duration, 
                 ease: image.animation.ease 
@@ -139,15 +144,15 @@ function App() {
               {!isMobile && (
                 <>
                   <motion.div
-                    initial={{ opacity: 0, x: -50, y: sideCards.baseYOffset }}
-                    animate={{ 
-                      opacity: 1, 
-                      x: `calc(-${sideCards.horizontalOffset})`,
-                      y: `calc(${sideCards.baseYOffset} - ${sideCards.verticalOffset})`
-                    }}
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: `calc(-${sideCards.horizontalOffset})` }}
+                    viewport={animations.viewport}
                     transition={{ duration: 1, delay: 0.8 }}
                     className="absolute"
-                    style={{ pointerEvents: 'auto' }}
+                    style={{ 
+                      pointerEvents: 'auto',
+                      y: `calc(${sideCards.baseYOffset} - ${sideCards.verticalOffset})`
+                    }}
                   >
                     <AnimatedCard 
                       header={sideCards.left.header}
@@ -157,15 +162,15 @@ function App() {
                     />
                   </motion.div>
                   <motion.div
-                    initial={{ opacity: 0, x: 50, y: sideCards.baseYOffset }}
-                    animate={{ 
-                      opacity: 1, 
-                      x: sideCards.horizontalOffset,
-                      y: `calc(${sideCards.baseYOffset} + ${sideCards.verticalOffset})`
-                    }}
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: sideCards.horizontalOffset }}
+                    viewport={animations.viewport}
                     transition={{ duration: 1, delay: 0.8 }}
                     className="absolute"
-                    style={{ pointerEvents: 'auto' }}
+                    style={{ 
+                      pointerEvents: 'auto',
+                      y: `calc(${sideCards.baseYOffset} + ${sideCards.verticalOffset})`
+                    }}
                   >
                     <AnimatedCard 
                       header={sideCards.right.header}
@@ -214,8 +219,18 @@ function App() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="min-h-screen relative z-10" style={{ background: colors.aboutBackground }}>
-          {/* About section content */}
+        <section id="about" className="min-h-screen relative z-10 flex flex-col items-center pt-32" style={{ background: colors.aboutBackground }}>
+          <SplitText
+            text={about.title.text}
+            className={about.title.className}
+            delay={about.title.delay}
+            duration={about.title.duration}
+            ease={about.title.ease}
+            from={about.title.from}
+            to={about.title.to}
+            threshold={about.title.threshold}
+            rootMargin={about.title.rootMargin}
+          />
         </section>
       </div>
     </ClickSpark>
