@@ -3,6 +3,7 @@ export const THEME_CONFIG = {
     background: "#000000",
     backgroundGradient: "radial-gradient(circle at center, #101010 0%, #000000 100%)",
     primary: "#00d0ff", // New Accent color
+    aboutBackground: "radial-gradient(circle, #191e1f 0%, #171717 100%)",
     text: "#ffffff",
     particles: ["#ffffff"],
     zinc: {
