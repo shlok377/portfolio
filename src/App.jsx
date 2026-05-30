@@ -4,10 +4,11 @@ import Particles from './components/ReactBits/Particles';
 import TextPressure from './components/ReactBits/TextPressure';
 import ClickSpark from './components/ReactBits/ClickSpark';
 import Navbar from './components/Navbar';
+import AnimatedCard from './components/AnimatedCard';
 import { THEME_CONFIG } from './config';
 
 function App() {
-  const { colors, particles, image, title, tagline, sparks, breakpoints } = THEME_CONFIG;
+  const { colors, particles, image, title, tagline, sideCards, sparks, breakpoints } = THEME_CONFIG;
   const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {
@@ -57,7 +58,7 @@ function App() {
 
         {/* Hero Content */}
         <main className="relative z-10 min-h-screen flex flex-col items-center justify-center pointer-events-none">
-          {/* Text Group (Title + Tagline) */}
+          {/* Text Group (Name + Tagline) */}
           <div 
             style={{ 
               position: 'absolute',
@@ -113,7 +114,7 @@ function App() {
             </motion.div>
           </div>
 
-          {/* Image Section */}
+          {/* Image and Cards Section */}
           <motion.div
             initial={{ opacity: 0, y: image.animation.initialY }}
             animate={{ opacity: 1, y: currentImageYOffset }}
@@ -121,22 +122,82 @@ function App() {
               duration: image.animation.duration, 
               ease: image.animation.ease 
             }}
-            className="relative z-[5]"
+            className="relative z-[5] flex flex-col items-center justify-center w-full"
           >
-            <img 
-              src="img/me_transparent.png" 
-              alt="Shlok Dalsania" 
-              style={{
-                width: currentImage.width,
-                height: currentImage.height,
-                maxWidth: currentImage.maxWidth,
-                maxHeight: currentImage.maxHeight,
-                filter: `${colors.imageBrightness} ${colors.imageGrayscale}`,
-                maskImage: `linear-gradient(to bottom, black ${image.fadeStart}, transparent ${image.fadeEnd})`,
-                WebkitMaskImage: `linear-gradient(to bottom, black ${image.fadeStart}, transparent ${image.fadeEnd})`
-              }}
-              className="block"
-            />
+            {/* Desktop Side Cards */}
+            {!isMobile && (
+              <>
+                <motion.div
+                  initial={{ opacity: 0, x: -50, y: sideCards.baseYOffset }}
+                  animate={{ 
+                    opacity: 1, 
+                    x: `calc(-${sideCards.horizontalOffset})`,
+                    y: `calc(${sideCards.baseYOffset} - ${sideCards.verticalOffset})` // Shifted Quadrant 2
+                  }}
+                  transition={{ duration: 1, delay: 0.8 }}
+                  className="absolute"
+                  style={{ pointerEvents: 'auto' }}
+                >
+                  <AnimatedCard 
+                    header={sideCards.left.header}
+                    title={sideCards.left.title}
+                    description={sideCards.left.description}
+                    backgroundOpacity={sideCards.backgroundOpacity}
+                  />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: 50, y: sideCards.baseYOffset }}
+                  animate={{ 
+                    opacity: 1, 
+                    x: sideCards.horizontalOffset,
+                    y: `calc(${sideCards.baseYOffset} + ${sideCards.verticalOffset})` // Shifted Quadrant 4
+                  }}
+                  transition={{ duration: 1, delay: 0.8 }}
+                  className="absolute"
+                  style={{ pointerEvents: 'auto' }}
+                >
+                  <AnimatedCard 
+                    header={sideCards.right.header}
+                    title={sideCards.right.title}
+                    description={sideCards.right.description}
+                    backgroundOpacity={sideCards.backgroundOpacity}
+                  />
+                </motion.div>
+              </>
+            )}
+
+                  <img 
+                  src="img/me_transparent.png" 
+                  alt="Shlok Dalsania" 
+                  style={{
+                  width: currentImage.width,
+                  height: currentImage.height,
+                  maxWidth: currentImage.maxWidth,
+                  maxHeight: currentImage.maxHeight,
+                  filter: `${colors.imageBrightness} ${colors.imageGrayscale}`,
+                  maskImage: `linear-gradient(to bottom, black ${image.fadeStart}, transparent ${image.fadeEnd})`,
+                  WebkitMaskImage: `linear-gradient(to bottom, black ${image.fadeStart}, transparent ${image.fadeEnd})`
+                  }}
+                  className="block"
+                  />
+
+                  {/* Mobile Cards Stack */}
+                  {isMobile && (
+                  <div className="flex flex-col gap-6 items-center w-full pointer-events-auto mt-8 px-6">
+                  <AnimatedCard 
+                  header={sideCards.left.header}
+                  title={sideCards.left.title}
+                  description={sideCards.left.description}
+                  backgroundOpacity={sideCards.backgroundOpacity}
+                  />
+                  <AnimatedCard 
+                  header={sideCards.right.header}
+                  title={sideCards.right.title}
+                  description={sideCards.right.description}
+                  backgroundOpacity={sideCards.backgroundOpacity}
+                  />
+                  </div>
+                  )}
           </motion.div>
         </main>
       </div>

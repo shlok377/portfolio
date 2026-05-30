@@ -80,8 +80,28 @@ export const THEME_CONFIG = {
           letterSpacing: "0.15em",
           marginTop: "100px",
         }
-      },
-      navbar: {
+        },
+        sideCards: {
+        left: {
+          header: "Currently working on:",
+          title: "AI-Powered Products",
+          description: "Developing intelligent study companions and automated workflows using LLMs.",
+        },
+        right: {
+          header: "Recent Highlight:",
+          title: "SCET Computer Engineering",
+          description: "Building a strong foundation in software systems and engineering principles.",
+        },
+        horizontalOffset: "30vw", // Distance from center
+        verticalOffset: "100px",  // Staggered vertical distance
+        baseYOffset: "150px",     // Base shift for both cards
+        mobile: {
+          horizontalOffset: "0", // Center on mobile
+          marginTop: "400px",   // Space between stacked elements
+        },
+        backgroundOpacity: 0.4, // 0 to 1
+        },
+        navbar: {
         links: [
           { label: "Home", href: "#home" },
           { label: "Experience", href: "#experience" },
